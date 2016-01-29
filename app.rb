@@ -18,8 +18,14 @@ post "/" do
   end
 
   def method_teams(names, number)
-    teams = (names.length.to_f / number).ceil
-    new_array = names.shuffle.each_slice(teams).to_a
+    names_array = names.shuffle.map
+    new_array = Array.new(number) { Array.new }
+    count = 0
+    names_array.each do |name|
+      new_array[count] << name
+      count == (new_array.length-1) ? (count = 0) : (count += 1)
+    end
+    new_array
   end
 
   if session[:number] > session[:names].length

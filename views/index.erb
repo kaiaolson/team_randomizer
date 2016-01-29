@@ -4,7 +4,7 @@
   <div class="form-group">
     <label for="names" class="col-sm-1 control-label">Names</label>
     <div class="col-sm-5">
-      <input type="text" name="names" id="names" class="form-control" value="<%= session[:names].join(",") %>">
+      <input type="text" name="names" id="names" class="form-control" value="<%= session[:names].join(",") unless session[:names].nil?%>">
     </div>
   </div>
   <div class="form-group">
@@ -15,7 +15,7 @@
   <div class="form-group">
     <label for="number" class="col-sm-1 control-label">Number</label>
     <div class="col-sm-1">
-      <input type="text" id="number" name="number" class="form-control" value="<%= session[:number] %>">
+      <input type="text" id="number" name="number" class="form-control" value="<%= session[:number] unless session[:number].nil? %>">
     </div>
   </div>
   <div class="form-group">
