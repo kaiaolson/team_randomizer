@@ -1,41 +1,51 @@
-<h1>Team Randomizer</h1>
-<br>
-<form action="/" method="post" class="form-horizontal">
-  <div class="form-group">
-    <label for="names" class="col-sm-1 control-label">Names</label>
-    <div class="col-sm-5">
-      <input type="text" name="names" id="names" class="form-control" value="<%= session[:names].join(",") unless session[:names].nil?%>">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="method" class="col-sm-1 control-label">Method</label>
-    <div class="col-sm-5"><input type="radio" name="method" value="team_count" checked="checked"> Team Count
-      <input type="radio" name="method" value="per_team"> Number Per Team</div>
-  </div>
-  <div class="form-group">
-    <label for="number" class="col-sm-1 control-label">Number</label>
-    <div class="col-sm-1">
-      <input type="text" id="number" name="number" class="form-control" value="<%= session[:number] unless session[:number].nil? %>">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-1 col-sm-11">
-      <input type="submit" value="Submit" class="btn btn-primary">
-    </div>
-  </div>
-</form>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Team Randomizer</h1>
+      <br>
+      <form action="/" method="post" class="form-horizontal">
+        <div class="form-group">
+          <label for="names" class="col-sm-1 control-label">Names</label>
+          <div class="col-sm-5">
+            <input type="text" name="names" id="names" class="form-control" value="<%= session[:names].join(",") unless session[:names].nil?%>">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="method" class="col-sm-1 control-label">Method</label>
+          <div class="col-sm-5"><input type="radio" name="method" value="team_count" checked="checked"> Team Count
+            <input type="radio" name="method" value="per_team"> Number Per Team</div>
+        </div>
+        <div class="form-group">
+          <label for="number" class="col-sm-1 control-label">Number</label>
+          <div class="col-sm-1">
+            <input type="text" id="number" name="number" class="form-control" value="<%= session[:number] unless session[:number].nil? %>">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-1 col-sm-11">
+            <input type="submit" value="Submit" class="btn btn-primary">
+          </div>
+        </div>
+      </form>
 
-<hr>
-<% if @results.nil? %>
-<% elsif @results == "Number of teams must be between 1 and the number of members" %>
-  <p><%= @results %></p>
-<% else %>
-<% @results.each do |team| %>
-    <div class="teams">
-      <h1><%= "#{@results.index(team) + 1}" %></h1>
-      <% team.each do |name| %>
-      <p><%= "#{name}"%></p>
-      <% end %>
+      <hr>
     </div>
-<% end %>
-<% end %>
+  </div>
+  <div class="row">
+    <% if session[:results].nil? %>
+    <% elsif session[:results] == "Number of teams must be between 1 and the number of members" %>
+      <p><%= session[:results] %></p>
+    <% else %>
+     <% count = 1 %>
+    <% session[:results].each do |team| %>
+        <div class="teams col-sm-2">
+          <h1><%=count%></h1>
+          <% team.each do |name| %>
+          <p><%= "#{name}"%></p>
+          <% end %>
+          <% count += 1 %>
+        </div>
+    <% end %>
+    <% end %>
+    </div>
+</div>
